@@ -1,0 +1,40 @@
+@host = https://localhost:7048
+
+### Get movies
+GET {{host}}/movies
+Accept: application/json
+
+### Get movies by genre
+@genre = romance
+GET {{host}}/movies?genre={{genre}}
+
+### Get movie by id
+@id_to_get = 6c620146-8d6e-11ee-b8cf-509a4c43f702
+GET {{host}}/movies/{{id_to_get}}
+
+### Create movie
+POST {{host}}/movies
+Content-Type: application/json
+
+{
+  "title": "Sound of Freedom",
+  "year": 2023,
+  "director": "Alejandro Monteverde",
+  "duration": 131,
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0f/The_Sound_of_Freedom_Poster.jpg",
+  "genres": ["Action", "Drama"]
+}
+
+### Update movie
+@id_to_update = b53d9cbe-8d6e-11ee-b8cf-509a4c43f702
+PATCH {{host}}/movies/{{id_to_update}}
+Content-Type: application/json
+
+{
+  "title": "Sound of Freedom",
+  "year": 2023
+}
+
+### Delete movie
+@id_to_delete = 1c4659ad-92f1-11ee-bf3a-509a4c43f702
+DELETE {{host}}/movies/{{id_to_delete}}

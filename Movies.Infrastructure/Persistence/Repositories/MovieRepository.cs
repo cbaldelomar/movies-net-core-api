@@ -18,7 +18,7 @@ internal sealed class MovieRepository : IMovieRepository
     {
         return await _movies
             .Include(m => m.Genres)
-            .FirstOrDefaultAsync(e => e.UUID == id, cancellationToken);
+            .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
     public async Task<IEnumerable<Movie>> GetListAsync(

@@ -1,3 +1,3 @@
 namespace Movies.Domain.Genres;
 
-public record GenreId(int Value);
+public record GenreId(Guid Value);

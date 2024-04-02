@@ -11,15 +11,11 @@ internal sealed class MovieConfiguration : IEntityTypeConfiguration<Movie>
     {
         builder.ToTable("Movie");
 
+        builder.HasIndex(e => e.Id).IsUnique();
+
         builder.HasKey(e => e.Id);
 
-        //builder.Property(e => e.Id)
-        //    .HasConversion(
-        //        v => _mySqlFunctions.GuidToBin(v.Value), // from entity property to database
-        //        v => new MovieId(_mySqlFunctions.BinToGuid(v)) // from database to entity property
-        //    );
-
-        builder.Property(e => e.UUID)
+        builder.Property(e => e.Id)
             .HasConversion(
                 v => v.Value, // from entity property to database
                 v => new MovieId(v) // from database to entity property

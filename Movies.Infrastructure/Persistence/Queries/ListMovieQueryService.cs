@@ -22,7 +22,7 @@ internal sealed class ListMovieQueryService(ApplicationDbContext context) : ILis
 
         return await query
             .Select(e => new MovieResult(
-                e.UUID.Value,
+                e.Id.Value,
                 e.Title.Value,
                 e.Year.Value,
                 e.Director.Value,

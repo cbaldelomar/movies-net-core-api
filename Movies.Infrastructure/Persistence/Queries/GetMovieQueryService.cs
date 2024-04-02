@@ -13,9 +13,9 @@ internal sealed class GetMovieQueryService(ApplicationDbContext context) : IGetM
         MovieId id, CancellationToken cancellationToken = default)
     {
         return await _context.Movies
-            .Where(e => e.UUID == id)
+            .Where(e => e.Id == id)
             .Select(e => new MovieResult(
-                e.UUID.Value,
+                e.Id.Value,
                 e.Title.Value,
                 e.Year.Value,
                 e.Director.Value,

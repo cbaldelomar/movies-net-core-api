@@ -3,11 +3,9 @@ using Movies.Domain.Genres;
 
 namespace Movies.Domain.Movies;
 
-public sealed class Movie : AuditableEntity<byte[]>, IAggregateRoot
+public sealed class Movie : AuditableEntity<MovieId>, IAggregateRoot
 {
     private readonly List<Genre> _genres = [];
-
-    public MovieId UUID { get; } = default!;
 
     public Title Title { get; private set; } = default!;
 
@@ -36,11 +34,11 @@ public sealed class Movie : AuditableEntity<byte[]>, IAggregateRoot
         Rate? rate,
         IEnumerable<Genre> genres)
     {
-        //MovieId id = new(Guid.NewGuid());
+        MovieId id = new(Guid.NewGuid());
 
         Movie movie = new()
         {
-            //Id = id,
+            Id = id,
             Title = title,
             Year = year,
             Director = director,
@@ -49,7 +47,7 @@ public sealed class Movie : AuditableEntity<byte[]>, IAggregateRoot
             Rate = rate
         };
 
-        movie.UpdateGenres(genres);
+        movie.AddGenres(genres);
 
         return movie;
     }
@@ -73,19 +71,25 @@ public sealed class Movie : AuditableEntity<byte[]>, IAggregateRoot
         UpdateGenres(genres);
     }
 
-    public void UpdateGenres(IEnumerable<Genre> genres)
+    private void UpdateGenres(IEnumerable<Genre> genres)
     {
         var newGenres = genres.Distinct().ToList();
 
-        var deleteGenres = _genres.Except(newGenres);
-        var addGenres = newGenres.Except(_genres);
+        var deletedGenres = _genres.Except(newGenres);
+        var addedGenres = newGenres.Except(_genres);
 
-        foreach (var item in deleteGenres)
+        foreach (var item in deletedGenres)
         {
             _genres.Remove(item);
         }
 
-        foreach (var item in addGenres)
+
+        AddGenres(addedGenres);
+    }
+
+    private void AddGenres(IEnumerable<Genre> genres)
+    {
+        foreach (var item in genres)
         {
             _genres.Add(item);
         }

@@ -10,7 +10,15 @@ internal sealed class GenreConfiguration : IEntityTypeConfiguration<Genre>
     {
         builder.ToTable("Genre");
 
+        builder.HasIndex(e => e.Id).IsUnique();
+
         builder.HasKey(e => e.Id);
+
+        builder.Property(e => e.Id)
+            .HasConversion(
+                v => v.Value, // from entity property to database
+                v => new GenreId(v) // from database to entity property
+            );
 
         builder.Property(e => e.Name)
             .HasMaxLength(50)

@@ -9,7 +9,7 @@ Accept: application/json
 GET {{host}}/movies?genre={{genre}}
 
 ### Get movie by id
-@id_to_get = 6c620146-8d6e-11ee-b8cf-509a4c43f702
+@id_to_get = 6a5ab553-f11a-11ee-8fc3-509a4c43f702
 GET {{host}}/movies/{{id_to_get}}
 
 ### Create movie

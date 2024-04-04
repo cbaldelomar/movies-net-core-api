@@ -23,7 +23,7 @@ public class GetMovieList(ISender sender) : Endpoint<GetMovieListRequest, GetMov
 
         var list = result.Select(r => new MovieResponse(r)).ToList();
 
-        //await SendOkAsync(list, ct);
+        //await SendOkAsync(new GetMovieListResponse(list), ct);
         Response = new GetMovieListResponse(list);
     }
 }

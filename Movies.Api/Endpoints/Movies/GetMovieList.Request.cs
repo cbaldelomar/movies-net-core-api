@@ -1,3 +1,9 @@
-﻿namespace Movies.Api.Endpoints.Movies;
+using FastEndpoints;
 
-public record GetMovieListRequest(string? Genre);
+namespace Movies.Api.Endpoints.Movies;
+
+public record GetMovieListRequest
+{
+    [QueryParam]
+    public string? Genre { get; init; }
+}

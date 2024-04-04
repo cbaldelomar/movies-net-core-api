@@ -36,8 +36,8 @@ public class GetMovieListSummary : Summary<GetMovieList, GetMovieListRequest>
 
         var example = new GetMovieListResponse(movies);
 
-        Summary = "Returns movie list, optionally filtered by genre";
-        Response(200, "json object with movie list", example: example);
+        Summary = "Get movie list, optionally filtered by genre";
+        ResponseExamples[200] = example;
         RequestParam(r => r.Genre, "Genre name");
     }
 }

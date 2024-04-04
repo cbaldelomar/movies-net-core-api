@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Movies.Domain.Movies;
-using Movies.Infrastructure.Persistence.Configurations;
 
 namespace Movies.Infrastructure.Persistence;
 
 internal sealed class ApplicationDbContext : DbContext
 {
-    public DbSet<Movie> Movies { get; set; }
+    public DbSet<Movie> Movies => Set<Movie>();
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

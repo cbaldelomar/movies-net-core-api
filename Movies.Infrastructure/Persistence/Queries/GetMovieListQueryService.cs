@@ -5,7 +5,7 @@ using Movies.Domain.Movies;
 
 namespace Movies.Infrastructure.Persistence.Queries;
 
-internal sealed class ListMovieQueryService(ApplicationDbContext context) : IListMovieQueryService
+internal sealed class GetMovieListQueryService(ApplicationDbContext context) : IGetMovieListQueryService
 {
     private readonly ApplicationDbContext _context = context;
 

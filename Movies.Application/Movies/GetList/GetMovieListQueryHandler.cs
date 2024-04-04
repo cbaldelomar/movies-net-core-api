@@ -5,9 +5,9 @@ namespace Movies.Application.Movies.GetList;
 internal sealed class GetMovieListQueryHandler
     : IQueryHandler<GetMovieListQuery, IEnumerable<MovieResult>>
 {
-    private readonly IListMovieQueryService _queryService;
+    private readonly IGetMovieListQueryService _queryService;
 
-    public GetMovieListQueryHandler(IListMovieQueryService queryService)
+    public GetMovieListQueryHandler(IGetMovieListQueryService queryService)
     {
         _queryService = queryService;
     }

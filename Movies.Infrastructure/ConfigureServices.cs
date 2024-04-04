@@ -25,8 +25,8 @@ public static class ConfigureServices
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        services.AddScoped<IGetMovieQueryService, GetMovieQueryService>();
-        services.AddScoped<IListMovieQueryService, ListMovieQueryService>();
+        services.AddScoped<IGetMovieByIdQueryService, GetMovieByIdQueryService>();
+        services.AddScoped<IGetMovieListQueryService, GetMovieListQueryService>();
 
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 

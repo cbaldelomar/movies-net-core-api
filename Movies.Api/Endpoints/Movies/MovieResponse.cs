@@ -2,7 +2,7 @@ using Movies.Application.Movies;
 
 namespace Movies.Api.Endpoints.Movies;
 
-public record MovieResponse
+public class MovieResponse
 {
     public Guid Id { get; init; }
     public string Title { get; init; } = string.Empty;
@@ -29,4 +29,16 @@ public record MovieResponse
         Rate = result.Rate;
         Genres = result.Genres;
     }
+
+    public static readonly MovieResponse Example = new()
+    {
+        Id = Guid.Empty,
+        Title = "My Movie",
+        Year = DateTime.Now.Year,
+        Director = "John Doe",
+        Duration = 123,
+        Poster = "example.com/poster.jpg",
+        Rate = 9.5m,
+        Genres = new string[] { "Drama", "Action" },
+    };
 }

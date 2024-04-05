@@ -12,15 +12,9 @@ public sealed record Url
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
-        if (!IsValidUrl(value))
-        {
-            throw new ArgumentException($"{value} is not a valid url.", nameof(value));
-        }
-
-        return new Url
-        {
-            Value = value
-        };
+        return !IsValidUrl(value)
+            ? throw new ArgumentException($"{value} is not a valid url.", nameof(value))
+            : new Url { Value = value };
     }
 
     private static bool IsValidUrl(string url)

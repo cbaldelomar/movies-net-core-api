@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Movies\Create\" />
     <Folder Include="Movies\Delete\" />
     <Folder Include="Movies\Utilities\" />
     <Folder Include="Movies\Update\" />

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Movies.Application.Movies.GetById;
 using Movies.Application.Movies.GetList;
 using Movies.Domain.Abstractions;
+using Movies.Domain.Genres;
 using Movies.Domain.Movies;
 using Movies.Infrastructure.Persistence;
 using Movies.Infrastructure.Persistence.Queries;
@@ -22,6 +23,7 @@ public static class ConfigureServices
             options.UseMySQL(configuration.GetConnectionString(CONNECTION_NAME)!));
 
         services.AddScoped<IMovieRepository, MovieRepository>();
+        services.AddScoped<IGenreRepository, GenreRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

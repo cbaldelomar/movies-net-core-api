@@ -6,10 +6,14 @@ using Movies.Domain.Abstractions;
 namespace Movies.Infrastructure.Persistence;
 
 internal sealed class UnitOfWork(
-    ApplicationDbContext _context,
-    IPublisher _publisher,
-    IDateTimeProvider _dateTimeProvider) : IUnitOfWork
+    ApplicationDbContext context,
+    IPublisher publisher,
+    IDateTimeProvider dateTimeProvider) : IUnitOfWork
 {
+    private readonly ApplicationDbContext _context = context;
+    private readonly IPublisher _publisher = publisher;
+    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
 
@@ -17,7 +21,7 @@ internal sealed class UnitOfWork(
         UpdateAuditableEntities();
 
         // Publish domain events.
-        await PublishDomainEvents();
+        await PublishDomainEventsAsync();
 
         // Add more logic before save changes...
 
@@ -43,7 +47,7 @@ internal sealed class UnitOfWork(
         }
     }
 
-    private async Task PublishDomainEvents()
+    private async Task PublishDomainEventsAsync()
     {
         var domainEvents = _context.ChangeTracker.Entries<IEntity>()
             .Select(e => e.Entity)

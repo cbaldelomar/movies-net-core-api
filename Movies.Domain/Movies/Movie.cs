@@ -26,6 +26,7 @@ public sealed class Movie : AuditableEntity<MovieId>, IAggregateRoot
     }
 
     public static Movie Create(
+        MovieId id,
         Title title,
         Year year,
         Director director,
@@ -34,8 +35,6 @@ public sealed class Movie : AuditableEntity<MovieId>, IAggregateRoot
         Rate? rate,
         IEnumerable<Genre> genres)
     {
-        MovieId id = new(Guid.NewGuid());
-
         Movie movie = new()
         {
             Id = id,
@@ -89,7 +88,7 @@ public sealed class Movie : AuditableEntity<MovieId>, IAggregateRoot
 
     private void AddGenres(IEnumerable<Genre> genres)
     {
-        foreach (var item in genres)
+        foreach (Genre item in genres)
         {
             _genres.Add(item);
         }

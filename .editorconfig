@@ -50,14 +50,14 @@ dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fie
 dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case
 
 # Use camelCase for private fields, and prefix them with underscore
-dotnet_naming_rule.private_members_with_underscore.severity = error
-dotnet_naming_rule.private_members_with_underscore.symbols  = private_fields
-dotnet_naming_rule.private_members_with_underscore.style = prefix_with_underscore
+dotnet_naming_rule.private_fields_should_be_begins_with_underscore.severity = error
+dotnet_naming_rule.private_fields_should_be_begins_with_underscore.symbols  = private_fields
+dotnet_naming_rule.private_fields_should_be_begins_with_underscore.style = begins_with_underscore
 
 # Use camelCase for private static fields, and prefix them with s_
-dotnet_naming_rule.private_members_should_be_begins_with_s_.severity = error
-dotnet_naming_rule.private_members_should_be_begins_with_s_.symbols  = private_static_fields
-dotnet_naming_rule.private_members_should_be_begins_with_s_.style = prefix_with_s_
+dotnet_naming_rule.private_static_fields_should_be_begins_with_s_.severity = error
+dotnet_naming_rule.private_static_fields_should_be_begins_with_s_.symbols  = private_static_fields
+dotnet_naming_rule.private_static_fields_should_be_begins_with_s_.style = begins_with_s_
 
 # Use camelCase for parameters
 dotnet_naming_rule.parameters_should_be_camel_case.severity = error
@@ -65,9 +65,9 @@ dotnet_naming_rule.parameters_should_be_camel_case.symbols  = parameters
 dotnet_naming_rule.parameters_should_be_camel_case.style = camel_case
 
 # Use PascalCase for async methods, and suffix then with "Async"
-dotnet_naming_rule.async_methods_should_be_end_with_async.severity = error
-dotnet_naming_rule.async_methods_should_be_end_with_async.symbols  = async_methods
-dotnet_naming_rule.async_methods_should_be_end_with_async.style = suffix_with_async
+dotnet_naming_rule.async_methods_should_be_ends_with_async.severity = error
+dotnet_naming_rule.async_methods_should_be_ends_with_async.symbols  = async_methods
+dotnet_naming_rule.async_methods_should_be_ends_with_async.style = ends_with_async
 
 # Symbol specifications #
 
@@ -125,20 +125,20 @@ dotnet_naming_style.begins_with_i.required_suffix =
 dotnet_naming_style.begins_with_i.word_separator = 
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
 
-dotnet_naming_style.prefix_with_underscore.required_prefix = _
-dotnet_naming_style.prefix_with_underscore.required_suffix =
-dotnet_naming_style.prefix_with_underscore.word_separator = 
-dotnet_naming_style.prefix_with_underscore.capitalization = camel_case
+dotnet_naming_style.begins_with_underscore.required_prefix = _
+dotnet_naming_style.begins_with_underscore.required_suffix =
+dotnet_naming_style.begins_with_underscore.word_separator = 
+dotnet_naming_style.begins_with_underscore.capitalization = camel_case
 
-dotnet_naming_style.prefix_with_s_.required_prefix = s_
-dotnet_naming_style.prefix_with_s_.required_suffix =
-dotnet_naming_style.prefix_with_s_.word_separator = 
-dotnet_naming_style.prefix_with_s_.capitalization = camel_case
+dotnet_naming_style.begins_with_s_.required_prefix = s_
+dotnet_naming_style.begins_with_s_.required_suffix =
+dotnet_naming_style.begins_with_s_.word_separator = 
+dotnet_naming_style.begins_with_s_.capitalization = camel_case
 
-dotnet_naming_style.suffix_with_async.required_prefix = 
-dotnet_naming_style.suffix_with_async.required_suffix = Async
-dotnet_naming_style.suffix_with_async.word_separator = 
-dotnet_naming_style.suffix_with_async.capitalization = pascal_case
+dotnet_naming_style.ends_with_async.required_prefix = 
+dotnet_naming_style.ends_with_async.required_suffix = Async
+dotnet_naming_style.ends_with_async.word_separator = 
+dotnet_naming_style.ends_with_async.capitalization = pascal_case
 
 ###############################
 # .NET Coding Conventions     #
@@ -147,7 +147,7 @@ dotnet_naming_style.suffix_with_async.capitalization = pascal_case
 dotnet_sort_system_directives_first = true
 # Namespace convention
 dotnet_style_namespace_match_folder = true:error
-# Unsed parameters
+# Unused parameters
 dotnet_code_quality_unused_parameters = all:error
 # this. preferences
 dotnet_style_qualification_for_field = false:error
@@ -165,7 +165,7 @@ dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
 # Modifier preferences
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:error
 dotnet_style_readonly_field = true:error
-# Operators wrapping
+# Operators wrapping during a refactor
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 # Expression-level preferences
 dotnet_style_coalesce_expression = true:suggestion
@@ -183,9 +183,6 @@ dotnet_style_prefer_inferred_tuple_names = true:error
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:error
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_style_prefer_simplified_interpolation = true:error
-# Other
-dotnet_style_allow_statement_immediately_after_block_experimental = true:silent
-dotnet_style_allow_multiple_blank_lines_experimental = true:silent
 
 ###############################
 # C# Coding Conventions       #
@@ -241,15 +238,6 @@ csharp_style_prefer_readonly_struct = true:suggestion
 csharp_prefer_static_local_function = true:error
 csharp_style_prefer_readonly_struct_member = true:suggestion
 csharp_style_prefer_switch_expression = true:suggestion
-# Wrapping preferences
-csharp_preserve_single_line_statements = true
-csharp_preserve_single_line_blocks = true
-# Other
-csharp_style_allow_embedded_statements_on_same_line_experimental = true:silent
-csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true:silent
-csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:silent
-csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true:silent
-csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true:silent
 
 ###############################
 # C# Formatting Rules         #
@@ -292,6 +280,9 @@ csharp_space_around_declaration_statements = false
 csharp_space_before_open_square_brackets = false
 csharp_space_between_empty_square_brackets = false
 csharp_space_between_square_brackets = false
+# Wrapping preferences
+csharp_preserve_single_line_statements = true
+csharp_preserve_single_line_blocks = true
 
 ###############################
 # Code Quality Rules          #

@@ -18,10 +18,12 @@ public class UpdateMovie(ISender sender) : Endpoint<UpdateMovieRequest>
         Summary(s =>
         {
             s.Summary = "Update a movie.";
-            s.ResponseExamples[StatusCodes.Status204NoContent] = MovieResponse.Example;
 
             Description(d => d
-                .Produces(StatusCodes.Status404NotFound));
+                .Produces(StatusCodes.Status204NoContent)
+                .Produces(StatusCodes.Status404NotFound)
+                .ProducesProblemFE()
+                .ClearDefaultProduces(StatusCodes.Status200OK));
         });
     }
 

@@ -1,4 +1,4 @@
-﻿using FastEndpoints;
+using FastEndpoints;
 using MediatR;
 using Movies.Application.Movies;
 using Movies.Application.Movies.GetById;

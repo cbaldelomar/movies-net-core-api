@@ -1,4 +1,4 @@
-﻿using FastEndpoints;
+using FastEndpoints;
 using MediatR;
 using Movies.Application.Movies;
 using Movies.Application.Movies.GetList;
@@ -13,6 +13,16 @@ public class GetMovieList(ISender sender) : Endpoint<GetMovieListRequest, GetMov
     {
         Get("movies");
         AllowAnonymous();
+
+        Summary(s =>
+        {
+            s.Summary = "Get movie list.";
+            s.ResponseExamples[StatusCodes.Status200OK] =
+                new List<MovieResponse> { MovieResponse.Example };
+
+            Description(d => d
+                .ClearDefaultProduces(StatusCodes.Status400BadRequest));
+        });
     }
 
     public override async Task HandleAsync(GetMovieListRequest req, CancellationToken ct)

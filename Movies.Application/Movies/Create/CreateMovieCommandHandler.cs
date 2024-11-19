@@ -6,11 +6,13 @@ using Movies.Domain.Movies;
 namespace Movies.Application.Movies.Create;
 
 public sealed class CreateMovieCommandHandler(
+    ICheckMovieExistsQueryService queryService,
     IGenreRepository genreRepository,
     IMovieRepository movieRepository,
     IUnitOfWork unitOfWork)
     : ICommandHandler<CreateMovieCommand, MovieResult?>
 {
+    private readonly ICheckMovieExistsQueryService _queryService = queryService;
     private readonly IGenreRepository _genreRepository = genreRepository;
     private readonly IMovieRepository _movieRepository = movieRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
@@ -41,6 +43,14 @@ public sealed class CreateMovieCommandHandler(
         var duration = Duration.Create(request.Duration);
         var poster = request.Poster is null ? null : Url.Create(request.Poster);
         var rate = request.Rate is null ? null : Rate.Create(request.Rate.Value);
+
+        bool movieExists = await _queryService
+            .CheckAsync(title, year, director, id, cancellationToken);
+
+        if (movieExists)
+        {
+            return null;
+        }
 
         var newMovie = Movie.Create(id, title, year, director, duration, poster, rate, validGenres);
 

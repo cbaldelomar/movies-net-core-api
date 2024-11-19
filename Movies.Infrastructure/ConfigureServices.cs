@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Movies.Application.Movies.Create;
 using Movies.Application.Movies.GetById;
 using Movies.Application.Movies.GetList;
 using Movies.Domain.Abstractions;
@@ -29,6 +30,7 @@ public static class ConfigureServices
 
         services.AddScoped<IGetMovieByIdQueryService, GetMovieByIdQueryService>();
         services.AddScoped<IGetMovieListQueryService, GetMovieListQueryService>();
+        services.AddScoped<ICheckMovieExistsQueryService, CheckMovieExistsQueryService>();
 
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 

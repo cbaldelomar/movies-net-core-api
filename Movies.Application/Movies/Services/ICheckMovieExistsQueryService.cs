@@ -1,6 +1,6 @@
 using Movies.Domain.Movies;
 
-namespace Movies.Application.Movies.Create;
+namespace Movies.Application.Movies.Services;
 
 public interface ICheckMovieExistsQueryService
 {

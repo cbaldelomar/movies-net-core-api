@@ -1,4 +1,4 @@
-namespace Movies.Application.Movies.GetList;
+namespace Movies.Application.Movies.Services;
 
 public interface IGetMovieListQueryService
 {

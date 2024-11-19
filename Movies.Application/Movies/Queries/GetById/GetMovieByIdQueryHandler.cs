@@ -1,7 +1,8 @@
 using Movies.Application.Abstractions;
+using Movies.Application.Movies.Services;
 using Movies.Domain.Movies;
 
-namespace Movies.Application.Movies.GetById;
+namespace Movies.Application.Movies.Queries.GetById;
 
 public class GetMovieByIdQueryHandler(IGetMovieByIdQueryService queryService)
     : IQueryHandler<GetMovieByIdQuery, MovieResult?>

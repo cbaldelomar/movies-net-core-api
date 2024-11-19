@@ -1,9 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Movies.Application.Movies.Create;
-using Movies.Application.Movies.GetById;
-using Movies.Application.Movies.GetList;
+using Movies.Application.Movies.Services;
 using Movies.Domain.Abstractions;
 using Movies.Domain.Genres;
 using Movies.Domain.Movies;

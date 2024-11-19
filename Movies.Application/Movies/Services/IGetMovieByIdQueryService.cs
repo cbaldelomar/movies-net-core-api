@@ -1,6 +1,6 @@
 using Movies.Domain.Movies;
 
-namespace Movies.Application.Movies.GetById;
+namespace Movies.Application.Movies.Services;
 
 public interface IGetMovieByIdQueryService
 {

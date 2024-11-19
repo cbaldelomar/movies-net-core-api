@@ -1,7 +1,7 @@
 using FastEndpoints;
 using MediatR;
 using Movies.Application.Movies;
-using Movies.Application.Movies.GetById;
+using Movies.Application.Movies.Queries.GetById;
 
 namespace Movies.Api.Endpoints.Movies;
 

@@ -1,6 +1,7 @@
 using Movies.Application.Abstractions;
+using Movies.Application.Movies.Services;
 
-namespace Movies.Application.Movies.GetList;
+namespace Movies.Application.Movies.Queries.GetList;
 
 internal sealed class GetMovieListQueryHandler
     : IQueryHandler<GetMovieListQuery, IEnumerable<MovieResult>>

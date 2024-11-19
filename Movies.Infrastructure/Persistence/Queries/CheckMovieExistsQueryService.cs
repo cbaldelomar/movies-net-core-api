@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Movies.Application.Movies.Create;
+using Movies.Application.Movies.Services;
 using Movies.Domain.Movies;
 
 namespace Movies.Infrastructure.Persistence.Queries;

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Movies.Application.Movies.GetById;
 using Movies.Domain.Movies;
 using Movies.Application.Movies;
+using Movies.Application.Movies.Services;
 
 namespace Movies.Infrastructure.Persistence.Queries;
 

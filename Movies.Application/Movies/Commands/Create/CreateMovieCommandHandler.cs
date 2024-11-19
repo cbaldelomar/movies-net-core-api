@@ -1,9 +1,10 @@
 using Movies.Application.Abstractions;
+using Movies.Application.Movies.Services;
 using Movies.Domain.Abstractions;
 using Movies.Domain.Genres;
 using Movies.Domain.Movies;
 
-namespace Movies.Application.Movies.Create;
+namespace Movies.Application.Movies.Commands.Create;
 
 public sealed class CreateMovieCommandHandler(
     ICheckMovieExistsQueryService queryService,

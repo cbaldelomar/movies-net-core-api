@@ -1,6 +1,6 @@
 using FastEndpoints;
 using MediatR;
-using Movies.Application.Movies.Delete;
+using Movies.Application.Movies.Commands.Delete;
 
 namespace Movies.Api.Endpoints.Movies;
 

@@ -1,7 +1,7 @@
-﻿using FastEndpoints;
+using FastEndpoints;
 using MediatR;
 using Movies.Application.Movies;
-using Movies.Application.Movies.Create;
+using Movies.Application.Movies.Commands.Create;
 
 namespace Movies.Api.Endpoints.Movies;
 

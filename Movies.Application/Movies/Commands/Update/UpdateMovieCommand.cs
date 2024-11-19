@@ -1,6 +1,6 @@
 using Movies.Application.Abstractions;
 
-namespace Movies.Application.Movies.Update;
+namespace Movies.Application.Movies.Commands.Update;
 
 public sealed record UpdateMovieCommand(
     Guid Id,

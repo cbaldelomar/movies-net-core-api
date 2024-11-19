@@ -2,7 +2,7 @@ using Movies.Application.Abstractions;
 using Movies.Domain.Abstractions;
 using Movies.Domain.Movies;
 
-namespace Movies.Application.Movies.Delete;
+namespace Movies.Application.Movies.Commands.Delete;
 
 public sealed class DeleteMovieCommandHandler(
     IMovieRepository movieRepository,

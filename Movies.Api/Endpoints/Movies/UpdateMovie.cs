@@ -1,6 +1,6 @@
 using FastEndpoints;
 using MediatR;
-using Movies.Application.Movies.Update;
+using Movies.Application.Movies.Commands.Update;
 
 namespace Movies.Api.Endpoints.Movies;
 

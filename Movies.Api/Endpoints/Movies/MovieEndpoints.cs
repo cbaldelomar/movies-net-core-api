@@ -1,6 +1,6 @@
 using MediatR;
 using Movies.Application.Movies;
-using Movies.Application.Movies.GetList;
+using Movies.Application.Movies.Queries.GetList;
 
 namespace Movies.Api.Endpoints.Movies;
 

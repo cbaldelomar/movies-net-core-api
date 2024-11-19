@@ -1,6 +1,6 @@
 using Movies.Application.Abstractions;
 
-namespace Movies.Application.Movies.Create;
+namespace Movies.Application.Movies.Commands.Create;
 
 public sealed record CreateMovieCommand(
     string Title,

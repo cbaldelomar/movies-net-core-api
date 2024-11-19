@@ -74,7 +74,7 @@ public sealed class Movie : AuditableEntity<MovieId>, IAggregateRoot
     {
         var newGenres = genres.Distinct().ToList();
 
-        var deletedGenres = _genres.Except(newGenres);
+        var deletedGenres = _genres.Except(newGenres).ToList();
         var addedGenres = newGenres.Except(_genres);
 
         foreach (var item in deletedGenres)

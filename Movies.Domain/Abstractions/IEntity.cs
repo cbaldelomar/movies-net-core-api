@@ -2,7 +2,11 @@ namespace Movies.Domain.Abstractions;
 
 public interface IEntity
 {
-    IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
+    DateTime CreatedAt { get; }
 
-    void ClearDomainEvents();
+    DateTime? UpdatedAt { get; }
+
+    void SetCreatedAt(DateTime dateTime);
+
+    void SetUpdatedAt(DateTime dateTime);
 }

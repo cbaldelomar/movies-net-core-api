@@ -20,36 +20,39 @@ internal sealed class UnitOfWork(
         // Update auditable entities.
         UpdateAuditableEntities();
 
-        // Publish domain events.
-        await PublishDomainEventsAsync();
-
         // Add more logic before save changes...
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+        // Publish domain events.
+        await PublishDomainEventsAsync();
     }
 
     private void UpdateAuditableEntities()
     {
-        IEnumerable<EntityEntry<IAuditableEntity>> entries =
-            _context.ChangeTracker.Entries<IAuditableEntity>();
+        IEnumerable<EntityEntry<IEntity>> entries =
+            _context.ChangeTracker.Entries<IEntity>();
 
         foreach (var entry in entries.ToList())
         {
+            IEntity entity = entry.Entity;
+            DateTime dateTime = _dateTimeProvider.Now;
+
             if (entry.State == EntityState.Added)
             {
-                entry.Property(e => e.CreatedAt).CurrentValue = _dateTimeProvider.Now;
+                entity.SetCreatedAt(dateTime);
             }
 
             if (entry.State == EntityState.Modified)
             {
-                entry.Property(e => e.UpdatedAt).CurrentValue = _dateTimeProvider.Now;
+                entity.SetUpdatedAt(dateTime);
             }
         }
     }
 
     private async Task PublishDomainEventsAsync()
     {
-        var domainEvents = _context.ChangeTracker.Entries<IEntity>()
+        IDomainEvent[] domainEvents = _context.ChangeTracker.Entries<IAggregateRoot>()
             .Select(e => e.Entity)
             .Where(e => e.DomainEvents.Count != 0)
             .SelectMany(e =>
@@ -63,11 +66,11 @@ internal sealed class UnitOfWork(
                 // Return the copy of domain events list.
                 return domainEvents;
             })
-            .ToList();
+            .ToArray();
 
-        foreach (var domainEvent in domainEvents)
+        foreach (IDomainEvent domainEvent in domainEvents)
         {
-            await _publisher.Publish(domainEvent);
+            await _publisher.Publish(domainEvent).ConfigureAwait(false);
         }
     }
 }

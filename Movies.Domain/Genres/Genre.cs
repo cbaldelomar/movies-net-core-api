@@ -3,7 +3,7 @@ using Movies.Domain.Movies;
 
 namespace Movies.Domain.Genres;
 
-public sealed class Genre : Entity<GenreId>, IAggregateRoot
+public sealed class Genre : Entity<GenreId>
 {
     private readonly List<Movie> _movies = [];
 

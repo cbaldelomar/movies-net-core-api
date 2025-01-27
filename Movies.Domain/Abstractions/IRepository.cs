@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 namespace Movies.Domain.Abstractions;
 
 public interface IRepository<TEntity, TEntityId>
-    where TEntity : Entity<TEntityId>, IAggregateRoot
+    where TEntity : AggregateRoot<TEntityId>
 {
     Task<TEntity?> GetByIdAsync(
         TEntityId id,

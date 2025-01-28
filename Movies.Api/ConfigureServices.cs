@@ -25,9 +25,8 @@ public static class ConfigureServices
                 Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
                 context.ProblemDetails.Extensions.TryAdd("traceId", activity?.Id);
 
-                if (environment.IsDevelopment())
+                if (environment.IsDevelopment() && context.Exception is not null)
                 {
-                    // Add additional details in development environment
                     context.ProblemDetails.Extensions.TryAdd("exception", context.Exception);
                     context.ProblemDetails.Extensions.TryAdd("application", environment.ApplicationName);
                 }

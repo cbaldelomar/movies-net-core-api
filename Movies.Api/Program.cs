@@ -39,12 +39,15 @@ try
     builder.Services
         .AddApplication()
         .AddInfrastructure(builder.Configuration)
-        .AddPresentation();
+        .AddPresentation(builder.Environment);
 
     builder.Host.UseSerilog((context, configuration) =>
         configuration.ReadFrom.Configuration(context.Configuration));
 
     var app = builder.Build();
+
+    // Converts unhandled exceptions into Problem Details responses
+    app.UseExceptionHandler();
 
     app.UseFastEndpoints();
 
@@ -60,6 +63,9 @@ try
     app.UseSerilogRequestLogging();
 
     app.UseHttpsRedirection();
+
+    //// Returns the Problem Details response for (empty) non-successful responses
+    //app.UseStatusCodePages();
 
     //app.MapMovieEndpoints();
 

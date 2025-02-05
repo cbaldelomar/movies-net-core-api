@@ -1,3 +1,4 @@
+using ErrorOr;
 using Movies.Application.Abstractions;
 using Movies.Application.Movies.Services;
 using Movies.Domain.Abstractions;
@@ -11,14 +12,14 @@ public sealed class CreateMovieCommandHandler(
     IGenreRepository genreRepository,
     IMovieRepository movieRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<CreateMovieCommand, MovieResult?>
+    : ICommandHandler<CreateMovieCommand, ErrorOr<MovieResult>>
 {
     private readonly ICheckMovieExistsQueryService _queryService = queryService;
     private readonly IGenreRepository _genreRepository = genreRepository;
     private readonly IMovieRepository _movieRepository = movieRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<MovieResult?> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<MovieResult>> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
     {
         IEnumerable<Genre> genres = await _genreRepository.GetListAsync(cancellationToken);
 
@@ -30,7 +31,8 @@ public sealed class CreateMovieCommandHandler(
 
         if (invalidGenres.Any())
         {
-            return null;
+            string invalidGenresString = string.Join(", ", invalidGenres);
+            return Error.Validation("genres", $"Invalid genres: {invalidGenresString}");
         }
 
         IEnumerable<Genre> validGenres = genres
@@ -50,7 +52,8 @@ public sealed class CreateMovieCommandHandler(
 
         if (movieExists)
         {
-            return null;
+            return Error.Conflict(
+                "Movie.Exists", $"Movie already exists: {title.Value}; {year.Value}; {director.Value}");
         }
 
         var newMovie = Movie.Create(id, title, year, director, duration, poster, rate, validGenres);

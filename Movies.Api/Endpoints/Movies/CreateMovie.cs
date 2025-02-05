@@ -1,5 +1,7 @@
+using ErrorOr;
 using FastEndpoints;
 using MediatR;
+using Movies.Api.Extensions;
 using Movies.Application.Movies;
 using Movies.Application.Movies.Commands.Create;
 
@@ -38,16 +40,16 @@ public class CreateMovie(ISender sender) : Endpoint<CreateMovieRequest, MovieRes
             req.Rate,
             req.Genres);
 
-        MovieResult? result = await _sender.Send(command, ct);
+        ErrorOr<MovieResult> result = await _sender.Send(command, ct);
 
-        if (result is null)
+        if (result.IsError)
         {
-            await SendResultAsync(Results.BadRequest());
+            await SendResultAsync(result.ToProblemDetails());
             return;
         }
 
-        var response = new MovieResponse(result);
+        var response = new MovieResponse(result.Value);
 
-        await SendCreatedAtAsync(GetMovieById.Route, new { id = result.Id }, response, cancellation: ct);
+        await SendCreatedAtAsync(GetMovieById.Route, new { id = result.Value.Id }, response, cancellation: ct);
     }
 }

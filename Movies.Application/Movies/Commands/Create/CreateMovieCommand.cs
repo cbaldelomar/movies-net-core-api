@@ -1,3 +1,4 @@
+using ErrorOr;
 using Movies.Application.Abstractions;
 
 namespace Movies.Application.Movies.Commands.Create;
@@ -10,4 +11,4 @@ public sealed record CreateMovieCommand(
     string? Poster,
     decimal? Rate,
     IEnumerable<string> Genres)
-    : ICommand<MovieResult>;
+    : ICommand<ErrorOr<MovieResult>>;

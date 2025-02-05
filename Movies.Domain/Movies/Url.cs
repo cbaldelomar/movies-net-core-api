@@ -13,14 +13,15 @@ public sealed record Url
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
         return !IsValidUrl(value)
-            ? throw new ArgumentException($"{value} is not a valid url.", nameof(value))
+            ? throw new ArgumentException(
+                $"The provided value is not a valid url", nameof(value))
             : new Url { Value = value };
     }
 
-    private static bool IsValidUrl(string url)
+    public static bool IsValidUrl(string? value)
     {
         // Check if the URL is well-formed
-        if (!Uri.TryCreate(url, UriKind.Absolute, out Uri? uri))
+        if (!Uri.TryCreate(value, UriKind.Absolute, out Uri? uri))
         {
             return false;
         }

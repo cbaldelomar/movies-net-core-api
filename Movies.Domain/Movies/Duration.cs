@@ -2,7 +2,8 @@ namespace Movies.Domain.Movies;
 
 public sealed record Duration
 {
-    private const short MinimumDuration = 1;
+    public const short MinDuration = 1;
+    public const short MaxDuration = short.MaxValue;
 
     public short Value { get; init; }
 
@@ -12,7 +13,8 @@ public sealed record Duration
 
     public static Duration Create(short value)
     {
-        ArgumentOutOfRangeException.ThrowIfLessThan(value, MinimumDuration);
+        ArgumentOutOfRangeException.ThrowIfLessThan(value, MinDuration);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(value, MaxDuration);
 
         return new Duration
         {

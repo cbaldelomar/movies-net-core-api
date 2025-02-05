@@ -34,6 +34,7 @@ internal sealed class ValidationBehavior<TRequest, TResponse>
 
         if (validationResult.IsValid)
         {
+            // Continue to next pipeline behavior
             return await next();
         }
 
